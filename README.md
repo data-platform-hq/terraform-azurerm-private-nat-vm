@@ -29,7 +29,7 @@ module "private-nat-vm" {
 
   project              = "datahq"
   env                  = "example"
-  location             = "eastus
+  location             = "eastus"
   resource_group       = "example_rg"
   vm_admin_credentials = local.vm_admin_credentials
   subnet_id            = data.azurerm_subnet.vm_subnet.id
