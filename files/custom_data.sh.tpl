@@ -2,10 +2,6 @@
 SCRIPT="/root/ip_fwd.sh"
 cat << 'EOF' > $SCRIPT
 #!/bin/bash
-#-------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-#--------------------------------------------------------------------------
 
 usage() {
   echo -e "\e[33m"
