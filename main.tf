@@ -24,7 +24,7 @@ resource "azurerm_linux_virtual_machine" "this" {
   size                = var.vm_size
   admin_username      = var.vm_admin_credentials.username
   custom_data = var.use_custom_data ? base64encode(templatefile("${path.module}/files/custom_data.sh.tpl",
-  { SUBNET_CIDRS = join(",", var.subnet_CIDRs) })) : null
+  { SUBNET_CIDRS = join(",", var.subnet_cidrs) })) : null
   encryption_at_host_enabled = var.encryption_at_host_enabled
   network_interface_ids      = [azurerm_network_interface.this.id]
 

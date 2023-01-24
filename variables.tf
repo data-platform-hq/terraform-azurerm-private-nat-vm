@@ -23,7 +23,7 @@ variable "subnet_id" {
   description = "The ID of the Subnet where Network Interface should be located in"
 }
 
-variable "subnet_CIDRs" {
+variable "subnet_cidrs" {
   type        = list(any)
   description = "CIDRs of subnets to be allowed on NAT instance"
 }
