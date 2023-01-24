@@ -3,18 +3,38 @@ Terraform module for virtual machine creation with NIC and iptables MASQUERADE c
 
 ## Usage
 This module is provisioning virtual machine with NIC. Below is an example that provisions VM with NIC and two subnets allowed in iptables configuration.
-```
+
+```hcl
+locals {
+  vm_admin_credentials = {
+    username   = "example_user"
+    public_key = "<public_rsa_key>"
+  }  
+}
+
+data "azurerm_subnet" "vm_subnet" {
+  name                 = "vm"
+  resource_group_name  = "vm_rg"
+  virtual_network_name = "vm_vnet"
+}
+
+data "azurerm_subnet" "example_subnet" {
+  name                 = "databricks-public"
+  resource_group_name  = "example_rg"
+  virtual_network_name = "example_vnet"
+}
+
 module "private-nat-vm" {
   source  = "data-platform-hq/private-nat-vm/azurerm"
 
-  project              = var.project
-  env                  = var.env
-  location             = var.location
-  resource_group       = var.resource_group
-  vm_admin_credentials = var.vm_admin_credentials
-  subnet_id            = var.shared_subnet_id
-  subnet_cidrs         = [var.subnet_id1, var.subnet_id2]
-  tags = var.tags
+  project              = "datahq"
+  env                  = "example"
+  location             = "eastus
+  resource_group       = "example_rg"
+  vm_admin_credentials = local.vm_admin_credentials
+  subnet_id            = data.azurerm_subnet.vm_subnet.id
+  subnet_cidrs         = toset(data.azurerm_subnet.example_subnet.address_prefixes)
+  tags                 = { environment = "dev" }
 }
 ```
 
