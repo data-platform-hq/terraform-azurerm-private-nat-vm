@@ -59,7 +59,10 @@ variable "tags" {
 }
 
 variable "nic_ip_configuration" {
-  type        = object(any)
+  type = object({
+    name                          = string
+    private_ip_address_allocation = string
+  })
   description = "Network interface card IP configuration"
   default = {
     name                          = "external"
@@ -68,7 +71,12 @@ variable "nic_ip_configuration" {
 }
 
 variable "vm_source_image_references" {
-  type        = object(any)
+  type = object({
+    publisher = string
+    offer     = string
+    sku       = string
+    version   = string
+  })
   description = "Virtual machine source image references"
   default = {
     publisher = "Canonical"
@@ -79,7 +87,10 @@ variable "vm_source_image_references" {
 }
 
 variable "vm_os_disk" {
-  type        = object(any)
+  type = object({
+    caching              = string
+    storage_account_type = string
+  })
   description = "Virtual machine OS disk configuration"
   default = {
     caching              = "None"
