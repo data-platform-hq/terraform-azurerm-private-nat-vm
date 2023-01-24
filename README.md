@@ -13,7 +13,7 @@ module "private-nat-vm" {
   resource_group       = var.resource_group
   vm_admin_credentials = var.vm_admin_credentials
   subnet_id            = var.shared_subnet_id
-  subnet_CIDRs         = [var.subnet_id1, var.subnet_id2]
+  subnet_cidrs         = [var.subnet_id1, var.subnet_id2]
   tags = var.tags
 }
 ```
@@ -51,7 +51,7 @@ No modules.
 | <a name="input_location"></a> [location](#input\_location)                                                             | Azure location                                                                                                                                     | `string`                                                                                                           | n/a                                                                                                                                   |   yes    |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group)                                         | The name of the resource group in which to create resources                                                                                        | `string`                                                                                                           | n/a                                                                                                                                   |   yes    |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)                                                        | The ID of the Subnet where Network Interface should be located in                                                                                  | `string`                                                                                                           | n/a                                                                                                                                   |   yes    |
-| <a name="input_subnet_CIDRs"></a> [subnet\_CIDRs](#input\_subnet\_CIDRs)                                               | CIDRs of subnets to be allowed on NAT instance                                                                                                     | `string`                                                                                                           | n/a                                                                                                                                   |   yes    |
+| <a name="input_subnet_cidrs"></a> [subnet\_CIDRs](#input\_subnet\_CIDRs)                                               | CIDRs of subnets to be allowed on NAT instance                                                                                                     | `string`                                                                                                           | n/a                                                                                                                                   |   yes    |
 | <a name="input_vm_admin_credentials"></a> [vm\_admin\_credentials](#input\_vm\_admin\_credentials)                     | Username and public key used during virtual machine creation                                                                                       | <pre>object({<br> username    = string <br> public_key  = string <br>})</pre>                                      | n/a                                                                                                                                   |   yes    |
 | <a name="input_suffix"></a> [suffix](#input\_suffix)                                                                   | Resource name suffix                                                                                                                               | `string`                                                                                                           | `""`                                                                                                                                  |    no    |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size)                                                              | Virtual machine instance size                                                                                                                      | `string`                                                                                                           | `Standard_B1ls`                                                                                                                       |    no    |
@@ -64,9 +64,9 @@ No modules.
 
 ## Outputs
 
-| Name                                                                                       | Description                    |
-|--------------------------------------------------------------------------------------------|--------------------------------|
-| <a name="azurerm_vm_private_ip"></a> [azurerm\_vm\_private\_ip](#azurerm\_vm\_private\_ip) | Private IP assigned to VM NIC. |
+| Name                                                                                       | Description                             |
+|--------------------------------------------------------------------------------------------|-----------------------------------------|
+| <a name="azurerm_vm_private_ip"></a> [azurerm\_vm\_private\_ip](#azurerm\_vm\_private\_ip) | Private IP address of virtual machine.  |
 <!-- END_TF_DOCS -->
 
 ## License
