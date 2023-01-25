@@ -18,15 +18,16 @@ resource "azurerm_network_interface" "this" {
 }
 
 resource "azurerm_linux_virtual_machine" "this" {
-  name                = "vm-${var.project}-${var.env}-${var.location}${local.suffix}"
-  resource_group_name = var.resource_group
-  location            = var.location
-  size                = var.vm_size
-  admin_username      = var.vm_admin_credentials.username
-  custom_data = var.use_custom_data ? base64encode(templatefile("${path.module}/files/custom_data.sh.tpl",
-  { SUBNET_CIDRS = join(",", var.subnet_cidrs) })) : null
+  name                       = "vm-${var.project}-${var.env}-${var.location}${local.suffix}"
+  resource_group_name        = var.resource_group
+  location                   = var.location
+  size                       = var.vm_size
+  admin_username             = var.vm_admin_credentials.username
   encryption_at_host_enabled = var.encryption_at_host_enabled
   network_interface_ids      = [azurerm_network_interface.this.id]
+
+  custom_data = var.use_custom_data ? base64encode(templatefile("${path.module}/files/custom_data.sh.tpl",
+  { SUBNET_CIDRS = join(",", var.subnet_cidrs) })) : null
 
   admin_ssh_key {
     username   = var.vm_admin_credentials.username
